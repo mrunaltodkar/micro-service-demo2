@@ -1,0 +1,10 @@
+package com.capgemini.springboot.microservice.example.currencyconversion;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name="forex-service" url="localhost:8000")
+public interface CurrencyExchangeServiceProxy {
+  @GetMapping("/currency-exchange/from/{from}/to/{to}")
+  public CurrencyConversionBean retrieveExchangeValue
+    (@PathVariable("from") String from, @PathVariable("to") String to);
+}

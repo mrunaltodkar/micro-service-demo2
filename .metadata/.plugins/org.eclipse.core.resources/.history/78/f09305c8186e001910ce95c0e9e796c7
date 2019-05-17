@@ -1,0 +1,36 @@
+package com.capgemini.bankapp.controller;
+
+@RestController
+public class BankAccountController {
+
+	@Autowired
+	private BankAccountService accountService;
+
+	@PostMapping("/account")
+	public ResponseEntity<BankAccount> addNewAccount(@RequestBody BankAccount account) {
+		accountService.addNew(account);
+		return new ResponseEntity<BankAccount>(account, HttpStatus.CREATED);
+	}
+
+	@GetMapping("/account")
+	public ResponseEntity<List<BankAccount>> getAllBankAccounts() {
+
+		return new ResponseEntity(accountService.getAllBankAccounts(), HttpStatus.OK);
+	}
+
+	@GetMapping("/account/{accountId}")
+	public ResponseEntity<BankAccount> getBankAccountById(@PathVariable int accountId) {
+		return new ResponseEntity(accountService.getBankAccountById(accountId), HttpStatus.OK);
+	}
+
+	@PutMapping("/account")
+	public ResponseEntity<BankAccount> updateBankDetails(@RequestBody BankAccount account) {
+		return new ResponseEntity(accountService.updateAccountById(account), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/account/{accountId}")
+	public ResponseEntity deleteBankAccount(@PathVariable int accountId) {
+		accountService.deleteAccountById(accountId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+}

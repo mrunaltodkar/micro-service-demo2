@@ -1,0 +1,5 @@
+package com.capgemini.springboot.microservice.example.forex;
+
+public class ExchangeValue {
+
+}
